@@ -16,7 +16,7 @@
 
 # Configuration
 /config/
-config.json
+*config.json
 
 # FVM Version Cache
 .fvm/

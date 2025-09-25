@@ -1,23 +1,49 @@
-sealed class POEditorConfig {
-  String get baseURL => 'https://api.poeditor.com/v2/';
+import 'package:equatable/equatable.dart';
 
-  String get apiToken;
+final class POEditorConfig extends Equatable {
+  final String baseURL;
 
-  Set<String> get projectIDs;
+  final String apiToken;
 
-  const POEditorConfig();
-}
+  final Set<String> projectIDs;
 
-final class POEditorConfigProduction extends POEditorConfig {
+  const POEditorConfig._({
+    required this.apiToken,
+    required this.projectIDs,
+    required this.baseURL,
+  });
+
+  factory POEditorConfig.fromJson(Map<String, dynamic> json) {
+    final baseURL = json['baseURL'] as String?;
+    if (baseURL == null) {
+      throw Exception('service.poeditor.baseURL (string) is required');
+    }
+
+    final apiToken = json['apiToken'] as String?;
+    if (apiToken == null) {
+      throw Exception('service.poeditor.apiToken (string) is required');
+    }
+
+    final projectIDs = (json['projectIDs'] as List<dynamic>?)?.cast<String>().toSet();
+    if (projectIDs == null) {
+      throw Exception('service.poeditor.projectIDs (list of strings) is required');
+    }
+
+    return POEditorConfig._(
+      baseURL: 'https://api.poeditor.com/v2/',
+      apiToken: apiToken,
+      projectIDs: projectIDs,
+    );
+  }
+
   @override
-  String get apiToken => const String.fromEnvironment(
-    'POEDITOR_API_TOKEN',
-  );
+  List<Object?> get props => [apiToken, projectIDs, baseURL];
 
   @override
-  Set<String> get projectIDs => Set.from(
-    const String.fromEnvironment('POEDITOR_PROJECT_IDS').split(','),
-  );
-
-  const POEditorConfigProduction();
+  String toString() {
+    return 'POEditorConfig\n'
+        '\t\t\tapiToken: $apiToken,\n'
+        '\t\t\tprojectIDs: $projectIDs,\n'
+        '\t\t\tbaseURL: $baseURL\n';
+  }
 }

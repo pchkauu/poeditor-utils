@@ -1,14 +1,34 @@
+import 'package:equatable/equatable.dart';
 import 'package:poeditor_utils/config/_barrel.dart';
 
-sealed class Config {
-  ServiceConfig get service;
+final class Config extends Equatable {
+  final ServiceConfig service;
 
-  const Config();
-}
+  const Config._({
+    required this.service,
+  });
 
-final class ConfigProduction extends Config {
+  factory Config.fromJson(Map<String, dynamic> json) {
+    final serviceJson = json['service'] as Map<String, dynamic>?;
+    if (serviceJson == null) {
+      throw Exception('service (object) is required');
+    }
+
+    final serviceConfig = ServiceConfig.fromJson(
+      serviceJson,
+    );
+
+    return Config._(
+      service: serviceConfig,
+    );
+  }
+
   @override
-  ServiceConfig get service => const ServiceConfigProduction();
+  List<Object?> get props => [service];
 
-  const ConfigProduction();
+  @override
+  String toString() {
+    return 'Config\n'
+        '\tservice: $service\n';
+  }
 }

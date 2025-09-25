@@ -1,5 +1,7 @@
 sealed class POEditorConfig {
-  String get apiKey;
+  String get baseURL => 'https://api.poeditor.com/v2/';
+
+  String get apiToken;
 
   Set<String> get projectIDs;
 
@@ -8,8 +10,8 @@ sealed class POEditorConfig {
 
 final class POEditorConfigProduction extends POEditorConfig {
   @override
-  String get apiKey => const String.fromEnvironment(
-    'POEDITOR_API_KEY',
+  String get apiToken => const String.fromEnvironment(
+    'POEDITOR_API_TOKEN',
   );
 
   @override

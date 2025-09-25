@@ -19,6 +19,13 @@ class Project extends Equatable {
     );
   }
 
+  Project addLanguages({required Set<Language> languages}) {
+    return Project(
+      id: id,
+      languages: languages,
+    );
+  }
+
   @override
   List<Object?> get props => [id, languages];
 }

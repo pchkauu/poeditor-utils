@@ -1,0 +1,13 @@
+{
+  "dart.lineLength": 120,
+  "dartBarrelFileGenerator.defaultBarrelName": "_barrel",
+  "dartBarrelFileGenerator.excludeFileList": [
+    "*bloc_event.dart",
+    "*bloc_state.dart",
+    "*.part.dart",
+    "*_event.dart",
+    "*_state.dart"
+  ],
+  "powermode.enabled": false,
+  "powermode.presets": "simple-rift",
+}

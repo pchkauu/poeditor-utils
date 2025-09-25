@@ -1,3 +1,22 @@
 # https://dart.dev/guides/libraries/private-files
 # Created by `dart pub`
 .dart_tool/
+
+# Generated files
+*.freezed.dart
+*.g.dart
+*.gr.dart
+*.config.dart
+*.gen.dart
+*.mocks.dart
+
+# Environment
+.env
+*.env
+
+# Configuration
+/config/
+config.json
+
+# FVM Version Cache
+.fvm/

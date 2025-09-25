@@ -2,21 +2,18 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:poeditor_utils/config/_barrel.dart';
-import 'package:poeditor_utils/dependencies/_barrel.dart';
-
-Future<void> _onError(Object error, StackTrace stackTrace) async {
-  print('Error: $error');
-  print('Stack trace: $stackTrace');
-}
+import 'package:poeditor_utils/poeditor_utils.dart';
 
 @pragma('vm:entry-point')
 Future<void> main(List<String> arguments) async {
+  Logger.init();
+  Logger.info('Logger initialized...\n');
+
   await runZonedGuarded(
     () async {
       // Get environment from command line
       const environment = String.fromEnvironment('ENVIRONMENT');
-      print('Environment: $environment');
+      Logger.info('Environment: $environment');
 
       // Parse config from ../config/production.json
       final config = await File('config/$environment.json').readAsString();
@@ -24,12 +21,19 @@ Future<void> main(List<String> arguments) async {
 
       // Initialize config manager
       ConfigManager.initFromJson(configMap);
-      print('Config initialized...\n${ConfigManager.config}');
+      Logger.info('Config initialized...\n${ConfigManager.config}');
 
       // Initialize dependencies
       await configureDependencies();
-      print('Dependencies initialized...\n');
+      Logger.info('Dependencies initialized...\n');
+
+      final projectRepository = getIt<ProjectRepository>();
+
+      for (final projectID in ConfigManager.config.service.poeditor.projectIDs) {
+        final languages = await projectRepository.fetchLanguagesV2(project: Project.fromID(id: projectID));
+        Logger.info('Languages: $languages');
+      }
     },
-    _onError,
+    Logger.unhandled,
   );
 }

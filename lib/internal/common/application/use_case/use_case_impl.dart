@@ -5,7 +5,7 @@ import 'package:poeditor_utils/internal/common/domain/_barrel.dart';
 import 'package:poeditor_utils/package/failure/_barrel.dart';
 
 @Singleton(as: CommonUseCase)
-abstract interface class CommonUseCaseImpl implements CommonUseCase {
+class CommonUseCaseImpl implements CommonUseCase {
   final ProjectRepository _projectRepository;
 
   CommonUseCaseImpl({
@@ -28,7 +28,7 @@ abstract interface class CommonUseCaseImpl implements CommonUseCase {
       }
 
       projectsWithLanguages.add(
-        project.addLanguages(languages: languages.right.toSet()),
+        project.addLanguages(languages: languages.right),
       );
     }
 

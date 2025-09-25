@@ -1,14 +1,5 @@
 import 'package:equatable/equatable.dart';
 
-/// ```json
-/// {
-///   "name": "French",
-///   "code": "fr",
-///   "translations": 1345,
-///   "percentage": 99.48,
-///   "updated": "2025-09-22T10:26:41+0000"
-/// }
-/// ```
 class Language extends Equatable {
   final String name;
   final String code;

@@ -6,7 +6,12 @@
     "*bloc_state.dart",
     "*.part.dart",
     "*_event.dart",
-    "*_state.dart"
+    "*_state.dart",
+    "*.g.dart",
+    "*gr.dart",
+    "*freezed.dart",
+    "*gen.dart",
+    "*mocks.dart",
   ],
   "powermode.enabled": false,
   "powermode.presets": "simple-rift",

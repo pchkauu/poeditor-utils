@@ -10,11 +10,11 @@ Future<Result<T>> executeMethod<T>(
     return Right(
       await methodLogic(),
     );
-  } on Failure catch (failure) {
+  } on Failure catch (failure, stackTrace) {
     await Observability.captureError(
       failure.toString(),
       failure,
-      failure.stackTrace,
+      stackTrace,
     );
 
     return Left(failure);

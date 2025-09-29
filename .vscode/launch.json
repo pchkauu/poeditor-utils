@@ -1,0 +1,14 @@
+{
+    "version": "0.0.1",
+    "configurations": [
+        {
+            "name": "CLI Tool",
+            "request": "launch",
+            "type": "dart",
+            "program": "bin/cli.dart",
+            "vmAdditionalArgs": [
+                "-DENVIRONMENT=production",
+            ]
+        },
+    ]
+}
